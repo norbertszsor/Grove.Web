@@ -4,9 +4,6 @@ namespace Grove.Data.Models
 { 
     public class BillingEm : Entity<Guid>
     {
-        public required Guid CustomerId { get; set; }
-
-        public virtual required CustomerEm Customer { get; set; }
 
         public DateTime Date { get; set; }
 
@@ -15,6 +12,10 @@ namespace Grove.Data.Models
         public decimal TotalDiscount { get; set; }
 
         public decimal GrandTotal { get; set; }
+
+        public required Guid CustomerId { get; set; }
+
+        public virtual required CustomerEm Customer { get; set; }
 
         public virtual ICollection<BillingItemEm>? Items { get; set; }
     }
