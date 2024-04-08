@@ -10,12 +10,8 @@ namespace Grove.Data.Models
 
         public decimal Price { get; set; }
 
-        public decimal Tax { get; set; }
-
-        public decimal Discount { get; set; }
-
         public Guid CategoryId { get; set; }
 
-        public virtual ProductCategoryEm Category { get; set; }
+        public virtual required ProductCategoryEm Category { get; set; }
     }
 }

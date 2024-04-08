@@ -14,6 +14,10 @@ namespace Grove.Data.Models
 
         public int Quantity { get; set; }
 
-        public decimal Value { get; set; }
+        public byte DiscountPercentage { get; set; }
+
+        public byte TaxPercentage { get; set; }
+
+        public decimal Price { get; set; }
     }
 }

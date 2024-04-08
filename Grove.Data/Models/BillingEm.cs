@@ -10,8 +10,6 @@ namespace Grove.Data.Models
 
         public DateTime Date { get; set; }
 
-        public decimal Total { get; set; }
-
         public decimal TotalTax { get; set; }
 
         public decimal TotalDiscount { get; set; }
