@@ -4,7 +4,6 @@ namespace Grove.Data.Models
 { 
     public class BillingEm : Entity<Guid>
     {
-
         public DateTime Date { get; set; }
 
         public decimal TotalTax { get; set; }
