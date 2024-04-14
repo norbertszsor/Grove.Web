@@ -12,6 +12,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Grove.Data\Grove.Data.csproj" />
+    <ProjectReference Include="..\Grove.Shared\Grove.Shared.csproj" />
   </ItemGroup>
 
 </Project>

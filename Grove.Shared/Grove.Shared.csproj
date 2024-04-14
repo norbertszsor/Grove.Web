@@ -7,9 +7,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Commands\" />
-    <Folder Include="Data\" />
-    <Folder Include="Queries\" />
+    <Folder Include="Transfer\Commands\" />
+    <Folder Include="Transfer\Data\" />
+    <Folder Include="Transfer\Queries\" />
   </ItemGroup>
 
   <ItemGroup>
