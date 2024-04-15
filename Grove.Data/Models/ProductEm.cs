@@ -15,6 +15,8 @@ namespace Grove.Data.Models
 
         public Guid CategoryId { get; set; }
 
+        public byte Region { get; set; }
+
         public virtual required ProductCategoryEm Category { get; set; }
 
         public virtual ICollection<BillingItemEm>? BillingItems { get; set; }
