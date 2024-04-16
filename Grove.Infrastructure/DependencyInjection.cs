@@ -7,9 +7,9 @@ namespace Grove.Infrastructure
     {
         public static IServiceCollection AddInfrastructure(this IServiceCollection services)
         {
-            services.AddSingleton<IReadOnlyStorage, ReadOnlyStorage>();
+            services.AddScoped<IReadOnlyStorage, ReadOnlyStorage>();
 
-            services.AddSingleton<IStorage, Storage>();
+            services.AddScoped<IStorage, Storage>();
 
             return services;
         }
