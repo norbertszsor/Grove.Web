@@ -1,0 +1,85 @@
+﻿@page "/summary"
+
+<div class="row">
+    <div class="col-10">
+        <h3>Summary</h3>
+    </div>
+    <div class="col-2">
+        <a><i class="bi bi-x-circle"></i></a>
+    </div>
+</div>
+
+
+<div class="modal-content">
+    <div class="modal-header">
+        <h5 class="modal-title strong" id="staticBackdropLabel">Podsumowanie</h5>
+        <a href="#" class="btn-close" data-bs-dismiss="modal" aria-label="Close">×</a>
+    </div>
+    <form method="POST" action="https://czasnalas.org" accept-charset="UTF-8" data-request="treeCart::onSubmitOrder" data-request-validate="true">
+        <input name="_session_key" type="hidden" value="8NkMcScYcUfv2gONdOUo3LhRVfWfXsir6fu3lDCt"><input name="_token" type="hidden" value="sIZSwqLrmcXWQwYPyVKYsa3rUQlyNkHH3k3Q6Rp2">
+        <div class="modal-body">
+            <p class="mb-1 strong">
+                ⦿ Zawartość koszyka:
+            </p>
+            <div class="tree-cart-item single">
+                <a href="#" data-request="treeCart::onDeleteItem" class="tree-cart-remove" data-request-data="id: 3" data-request-confirm="Potwierdź usunięcie wybranej pozycji"></a>
+                <div class="row align-items-center">
+                    <div class="col">
+                        <p class="strong">
+                            Dąb
+                        </p>
+                    </div>
+                    <div class="col-auto">
+                        <input type="number" value="1" min="1" max="100" step="1" class="d-inline-block form-control" name="amount[3]" data-request="treeCart::onUpdateAmount" data-track-input="1000" data-control="spinner">
+                        <p class="strong d-inline-block">
+                            × 25 zł
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="tree-cart-item">
+                <p class="strong text-end">
+                    Razem: 25 zł
+                </p>
+            </div>
+            <p class="mb-1 strong">
+                ⦿ Podaj dane
+            </p>
+            <div class="container-fluid">
+                <div class="row tree-cart-input mb-3">
+                    <div class="col-xxl-6 col-xl-6">
+                        <label for="name" class="form-label">Imię bądź <span id="dedicationttip" data-title="Proszę wpisać treść dedykacji zamiast imienia w celu otrzymania certyfikatu z dedykacją "><span data-control="ttip" data-ajax="false">dedykacja</span></span>*</label>
+                        <input type="text" class="form-control" id="name" placeholder="" name="name" value="">
+                        <div data-validate-for="name"></div>
+                    </div>
+                    <div class="col-xxl-6 col-xl-6">
+                        <label for="email" class="form-label">Adres e-mail</label>
+                        <input type="email" class="form-control" id="name" placeholder="" name="email" value="">
+                        <div data-validate-for="email"></div>
+                    </div>
+                </div>
+                <div class="row tree-cart-input">
+                    <div class="col-xxl-12 col-xl-12">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="1" id="agree" name="agree">
+                            <label class="form-check-label" for="agree">
+                                Akceptuję <a href="/regulamin" target="_blank">regulamin</a> i <a href="/polityka-prywatnosci" target="_blank">politykę prywatności</a> serwisu czasnalas.org
+                            </label>
+                        </div>
+                        <div data-validate-for="agree"></div>
+                        <div data-validate-for="order_data"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <a href="#" class="btn btn-inverted" data-bs-dismiss="modal">Anuluj</a>
+            <a href="#" data-request="treeCart::onSubmitOrder" data-request-success="handleOrderEvent(this, context, data, textStatus, jqXHR);" class="btn">Kontynuuj</a>
+        </div>
+    </form>
+</div>
+
+
+@code {
+    
+}

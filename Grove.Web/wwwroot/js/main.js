@@ -16,8 +16,12 @@
     $(window).scroll(function () {
         if ($(this).scrollTop() > 300) {
             $('.fixed-top .container').addClass('shadow-sm').css('max-width', '100%');
+            $('#navbar-example').removeClass('itemHidden');
+            $('#navbar-example').addClass('itemShown');
         } else {
             $('.fixed-top .container').removeClass('shadow-sm').css('max-width', '85%');
+            $('#navbar-example').removeClass('itemShown');
+            $('#navbar-example').addClass('itemHidden');
         }
     });
 
