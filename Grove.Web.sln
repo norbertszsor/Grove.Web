@@ -13,7 +13,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Grove.Infrastructure", "Gro
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Grove.Shared", "Grove.Shared\Grove.Shared.csproj", "{E1A8EDA8-C121-485A-81CB-230354B57505}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Grove.Data", "Grove.Data\Grove.Data.csproj", "{67992D6F-E18A-4FA5-B47D-B8250198561D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Grove.Data", "Grove.Data\Grove.Data.csproj", "{67992D6F-E18A-4FA5-B47D-B8250198561D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
