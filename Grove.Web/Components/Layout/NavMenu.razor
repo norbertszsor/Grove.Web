@@ -1,30 +1,43 @@
-﻿<div class="top-row ps-3 navbar navbar-dark">
-    <div class="container-fluid">
-        <a class="navbar-brand" href="">Grove.Web</a>
+﻿<!-- Navbar start -->
+<div class="container-fluid fixed-top px-0">
+    <div class="container px-0">
+        <nav class="navbar navbar-dark bg-dark navbar-expand-xl">
+            <h1 class="text-primary display-5 ms-3 logo-font">Grove</h1>
+            <button class="navbar-toggler py-2 px-3 me-3" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+                <span class="fa fa-bars text-primary"></span>
+            </button>
+            <div class="collapse navbar-collapse bg-dark" id="navbarCollapse">
+                <div class="navbar-nav ms-auto">
+                    <a href="index.html" class="nav-item nav-link active">Home</a>
+                    <a href="about.html" class="nav-item nav-link">About us</a>
+                    <a href="service.html" class="nav-item nav-link">Where we plant</a>
+                    <a href="causes.html" class="nav-item nav-link">Plant a tree</a>
+                    <a href="contact.html" class="nav-item nav-link">Contact</a>
+                    <a href="contact.html" class="nav-item nav-link pt-2 pb-0"><i class="fa badge fa-lg" style="color: black" value=0>&#xf07a;</i></a>
+                </div>
+            </div>
+        </nav>
     </div>
 </div>
+<!-- Navbar End -->
 
-<input type="checkbox" title="Navigation menu" class="navbar-toggler" />
-
-<div class="nav-scrollable" onclick="document.querySelector('.navbar-toggler').click()">
-    <nav class="flex-column">
-        <div class="nav-item px-3">
-            <NavLink class="nav-link" href="" Match="NavLinkMatch.All">
-                <span class="bi bi-house-door-fill-nav-menu" aria-hidden="true"></span> Home
-            </NavLink>
+<!-- Carousel Start -->
+<div class="container-fluid carousel-header vh-100 px-0">
+    <div id="carouselId" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-inner" role="listbox">
+            <div class="carousel-item active">
+                <img src="img/las.png" class="img-fluid" alt="Image">
+                <div class="carousel-caption">
+                    <div class="p-3" style="max-width: 900px;">
+                        <h4 class="text-white text-uppercase fw-bold mb-4" style="letter-spacing: 3px;">WE'll Save Our Planet</h4>
+                        <h1 class="display-1 text-capitalize text-white mb-4 h1-title">Protect Environment</h1>
+                        <p class="mb-5 fs-5">
+                            Join us and let's take care of our planet by planting forests together.
+                        </p>
+                    </div>
+                </div>
+            </div>
         </div>
-
-        <div class="nav-item px-3">
-            <NavLink class="nav-link" href="counter">
-                <span class="bi bi-plus-square-fill-nav-menu" aria-hidden="true"></span> Counter
-            </NavLink>
-        </div>
-
-        <div class="nav-item px-3">
-            <NavLink class="nav-link" href="weather">
-                <span class="bi bi-list-nested-nav-menu" aria-hidden="true"></span> Weather
-            </NavLink>
-        </div>
-    </nav>
+    </div>
 </div>
-
+<!-- Carousel End -->
