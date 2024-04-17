@@ -361,3 +361,6 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+/Grove.Web/grove_dev.db
+/Grove.Web/grove_dev.db-shm
+/Grove.Web/grove_dev.db-wal
