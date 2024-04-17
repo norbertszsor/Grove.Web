@@ -1,8 +1,6 @@
-﻿using Grove.Shared.Abstraction;
-using System.ComponentModel.DataAnnotations;
-using Grove.Shared.Enums;
+﻿using System.ComponentModel.DataAnnotations;
 
-namespace Grove.Shared.Transfer.Commands
+namespace Grove.Transfer.Commands
 {
     public class CreateProductCommand : ICommand<Guid>
     {

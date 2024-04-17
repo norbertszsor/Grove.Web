@@ -1,7 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using Grove.Shared.Abstraction;
 
-namespace Grove.Shared.Transfer.Commands
+namespace Grove.Transfer.Commands
 {
     public class DeleteProductCommand : ICommand
     {

@@ -1,7 +1,7 @@
 ﻿using Grove.Handling.Abstraction;
 using Grove.Shared.Transfer.Commands;
 
-namespace Grove.Handling.Handlers.Product
+namespace Grove.Handling.CommandHandlers
 {
     public class ProductCommandHandler : ICommandHandler<CreateProductCommand, Guid>,
         ICommandHandler<UpdateProductCommand, bool>,

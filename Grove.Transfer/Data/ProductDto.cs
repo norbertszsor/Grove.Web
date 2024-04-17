@@ -1,4 +1,4 @@
-﻿namespace Grove.Shared.Transfer.Data
+﻿namespace Grove.Transfer.Data
 {
     public class ProductDto
     {

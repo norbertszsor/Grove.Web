@@ -1,6 +1,6 @@
 ﻿using Grove.Shared.Abstraction;
 
-namespace Grove.Shared.Transfer
+namespace Grove.Shared
 {
     public class PagedList<T> : IPagedList<T>
     {
