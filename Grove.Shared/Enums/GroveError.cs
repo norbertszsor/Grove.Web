@@ -2,6 +2,12 @@
 {
     public enum GroveError
     {
-        Unknown
+        Unknown,
+        ProductCategoryNotFound,
+        ProductCategoryNotCreated,
+        ProductCategoryNotUpdated,
+        ProductNotCreated,
+        ProductNotUpdated,
+        ProductNotFound
     }
 }

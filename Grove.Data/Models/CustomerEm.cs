@@ -3,7 +3,7 @@ using Grove.Data.Abstraction;
 
 namespace Grove.Data.Models
 {
-    public class CustomerEm : Entity<Guid>
+    public class CustomerEm : Entity
     {
         [MaxLength(128)]
         public required string Name { get; set; }

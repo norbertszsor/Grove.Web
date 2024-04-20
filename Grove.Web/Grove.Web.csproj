@@ -22,6 +22,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Grove.Handling\Grove.Handling.csproj" />
     <ProjectReference Include="..\Grove.Infrastructure\Grove.Infrastructure.csproj" />
+    <ProjectReference Include="..\Grove.Logic\Grove.Logic.csproj" />
   </ItemGroup>
 
 </Project>

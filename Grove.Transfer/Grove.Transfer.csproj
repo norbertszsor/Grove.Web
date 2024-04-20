@@ -6,4 +6,8 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Grove.Shared\Grove.Shared.csproj" />
+  </ItemGroup>
+
 </Project>

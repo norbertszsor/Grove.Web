@@ -1,8 +1,8 @@
 ﻿namespace Grove.Data.Abstraction
 {
-    public abstract class Entity<TKey>
+    public abstract class Entity
     {
-        public required TKey Id { get; set; }
+        public Guid Id { get; set; }
 
         public DateTime CreatedAt { get; set; }
 

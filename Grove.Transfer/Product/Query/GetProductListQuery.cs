@@ -1,6 +1,7 @@
-﻿using Grove.Transfer.Data;
+﻿using Grove.Shared.Abstraction;
+using Grove.Transfer.Product.Data;
 
-namespace Grove.Transfer.Queries
+namespace Grove.Transfer.Product.Query
 {
     public class GetProductListQuery : ISearchQuery<ProductDto>
     {

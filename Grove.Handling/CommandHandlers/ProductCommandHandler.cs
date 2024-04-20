@@ -1,18 +1,19 @@
 ﻿using Grove.Handling.Abstraction;
-using Grove.Shared.Transfer.Commands;
+using Grove.Transfer.Product.Command;
+using Grove.Transfer.Product.Data;
 
 namespace Grove.Handling.CommandHandlers
 {
-    public class ProductCommandHandler : ICommandHandler<CreateProductCommand, Guid>,
-        ICommandHandler<UpdateProductCommand, bool>,
+    public class ProductCommandHandler : ICommandHandler<CreateProductCommand, ProductDto>,
+        ICommandHandler<UpdateProductCommand, ProductDto>,
         ICommandHandler<DeleteProductCommand>
     {
-        public Task<Guid> Handle(CreateProductCommand request, CancellationToken cancellationToken)
+        public Task<ProductDto> Handle(CreateProductCommand request, CancellationToken cancellationToken)
         {
             throw new NotImplementedException();
         }
 
-        public Task<bool> Handle(UpdateProductCommand request, CancellationToken cancellationToken)
+        public Task<ProductDto> Handle(UpdateProductCommand request, CancellationToken cancellationToken)
         {
             throw new NotImplementedException();
         }

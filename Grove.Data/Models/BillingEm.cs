@@ -2,7 +2,7 @@
 
 namespace Grove.Data.Models
 { 
-    public class BillingEm : Entity<Guid>
+    public class BillingEm : Entity
     {
         public DateTime Date { get; set; }
 

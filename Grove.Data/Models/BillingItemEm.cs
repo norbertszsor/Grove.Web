@@ -2,7 +2,7 @@
 
 namespace Grove.Data.Models
 {
-    public class BillingItemEm : Entity<Guid>
+    public class BillingItemEm : Entity
     {
         public int Quantity { get; set; }
 

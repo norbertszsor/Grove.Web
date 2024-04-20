@@ -1,7 +1,9 @@
 using Grove.Data;
 using Grove.Handling;
 using Grove.Infrastructure;
+using Grove.Logic;
 using Grove.Web.Components;
+using Grove.Web.Extensions;
 using Microsoft.EntityFrameworkCore;
 
 #region builder
@@ -15,8 +17,8 @@ builder.Services.AddLogging(options =>
 });
 
 builder.Services.AddInfrastructure();
-
 builder.Services.AddHandling();
+builder.Services.AddLogic();
 
 builder.Services.AddDbContext<GroveDbContext>(options =>
     options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection")));
@@ -38,6 +40,8 @@ if (!app.Environment.IsDevelopment())
     app.UseExceptionHandler("/Error", createScopeForErrors: true);
     app.UseHsts();
 }
+
+app.ApplyMigrations();
 
 app.UseHttpsRedirection();
 

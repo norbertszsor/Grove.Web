@@ -1,4 +1,5 @@
-﻿using Grove.Data;
+﻿using System.Linq.Expressions;
+using Grove.Data;
 using Grove.Data.Abstraction;
 using Grove.Data.Models;
 using Grove.Infrastructure.Abstraction;
@@ -17,64 +18,127 @@ namespace Grove.Infrastructure
 
         public IQueryable<ProductCategoryEm> ProductCategories => context.ProductCategories;
 
-        public async Task<TKey> InsertAsync<T, TKey>(T entity) where T : Entity<TKey>
+        public async Task<Guid> InsertAsync<T>(T entity) where T : Entity
         {
-            context.Add(entity);
+            await context.AddAsync(entity);
 
-            await context.SaveChangesAsync();
+            await SaveChangesAsync();
 
             return entity.Id;
         }
 
-        public async Task<TKey> UpdateAsync<T, TKey>(T entity) where T : Entity<TKey>
+        public async Task<T> InsertEntityAsync<T>(T entity) where T : Entity
+        {
+            await context.AddAsync(entity);
+
+            await SaveChangesAsync();
+
+            return entity;
+        }
+
+        public async Task<IEnumerable<Guid>> BulkInsertAsync<T>(IEnumerable<T>? entities) where T : Entity
+        {
+            if (entities == null)
+            {
+                return [];
+            }
+
+            entities = entities.ToList();
+
+            await context.AddRangeAsync(entities);
+
+            await SaveChangesAsync();
+
+            return entities.Select(e => e.Id);
+        }
+
+        public async Task<Guid> UpdateAsync<T>(T entity) where T : Entity
         {
             context.Update(entity);
 
-            await context.SaveChangesAsync();
+            await SaveChangesAsync();
 
             return entity.Id;
         }
 
-        public async Task DeleteAsync<T, TKey>(T entity) where T : Entity<TKey>
-        {
-            context.Remove(entity);
-
-            await context.SaveChangesAsync();
-        }
-
-        public async Task SaveChangesAsync()
-        {
-            await context.SaveChangesAsync();
-        }
-
-        public TKey Insert<T, TKey>(T entity) where T : Entity<TKey>
-        {
-            context.Add(entity);
-
-            context.SaveChanges();
-
-            return entity.Id;
-        }
-
-        public TKey Update<T, TKey>(T entity) where T : Entity<TKey>
+        public async Task<T> UpdateEntityAsync<T>(T entity) where T : Entity
         {
             context.Update(entity);
 
-            context.SaveChanges();
+            await SaveChangesAsync();
+
+            return entity;
+        }
+
+        public async Task<bool> DeleteAsync<T>(T entity) where T : Entity
+        {
+            context.Remove(entity);
+
+            return await SaveChangesAsync() > 0;
+        }
+
+        public async Task<int> SaveChangesAsync()
+        {
+            return await context.SaveChangesAsync();
+        }
+
+        public Guid Insert<T>(T entity) where T : Entity
+        {
+            context.Add(entity);
+
+            SaveChanges();
 
             return entity.Id;
         }
 
-        public void Delete<T, TKey>(T entity) where T : Entity<TKey>
+        public T InsertEntity<T>(T entity) where T : Entity
+        {
+            context.Add(entity);
+
+            SaveChanges();
+
+            return entity;
+        }
+
+        public IEnumerable<Guid> BulkInsert<T>(IEnumerable<T> entities) where T : Entity
+        {
+            entities = entities.ToList();
+
+            context.AddRange(entities);
+
+            SaveChanges();
+
+            return entities.Select(e => e.Id);
+        }
+
+        public Guid Update<T>(T entity) where T : Entity
+        {
+            context.Update(entity);
+
+            SaveChanges();
+
+            return entity.Id;
+        }
+
+        public T UpdateEntity<T>(T entity) where T : Entity
+        {
+            context.Update(entity);
+
+            SaveChanges();
+
+            return entity;
+        }
+
+        public bool Delete<T>(T entity) where T : Entity
         {
             context.Remove(entity);
 
-            context.SaveChanges();
+            return SaveChanges() > 0;
         }
 
-        public void SaveChanges()
+        public int SaveChanges()
         {
-            context.SaveChanges();
+            return context.SaveChanges();
         }
     }
 }

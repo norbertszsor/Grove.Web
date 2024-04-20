@@ -1,8 +1,11 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Grove.Shared.Abstraction;
+using System.ComponentModel.DataAnnotations;
+using Grove.Shared.Enums;
+using Grove.Transfer.Product.Data;
 
-namespace Grove.Transfer.Commands
+namespace Grove.Transfer.Product.Command
 {
-    public class CreateProductCommand : ICommand<Guid>
+    public class CreateProductCommand : ICommand<ProductDto>
     {
         [Required]
         [MaxLength(128)]

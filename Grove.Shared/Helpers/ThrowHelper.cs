@@ -4,6 +4,6 @@ namespace Grove.Shared.Helpers
 {
     public static class ThrowHelper
     {
-        public static void Throw(GroveError groveError) => throw new GroveException(groveError);
+        public static GroveException Throw(GroveError groveError) => throw new GroveException(groveError);
     }
 }

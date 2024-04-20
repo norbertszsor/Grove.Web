@@ -1,7 +1,7 @@
 ﻿using Grove.Handling.Abstraction;
 using Grove.Shared.Abstraction;
-using Grove.Shared.Transfer.Data;
-using Grove.Shared.Transfer.Queries;
+using Grove.Transfer.Product.Data;
+using Grove.Transfer.Product.Query;
 using MediatR;
 
 namespace Grove.Handling.QueryHandlers

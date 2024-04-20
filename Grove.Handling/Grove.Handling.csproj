@@ -12,6 +12,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Grove.Shared\Grove.Shared.csproj" />
+    <ProjectReference Include="..\Grove.Transfer\Grove.Transfer.csproj" />
   </ItemGroup>
 
 </Project>
