@@ -6,6 +6,10 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
 
+builder.Services.AddLocalization(options => 
+    options.ResourcesPath = "Resoruces"
+);
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -20,6 +24,16 @@ app.UseHttpsRedirection();
 
 app.UseStaticFiles();
 app.UseAntiforgery();
+
+var supportedCultures = builder.Configuration.GetSection("Cultures")
+    .GetChildren().ToDictionary(x => x.Key, x => x.Value).Keys.ToArray();
+
+var localizationOptions = new RequestLocalizationOptions()
+    .SetDefaultCulture(supportedCultures[0])
+    .AddSupportedCultures(supportedCultures)
+    .AddSupportedUICultures(supportedCultures);
+
+app.UseRequestLocalization(localizationOptions);
 
 app.UseStatusCodePagesWithRedirects("/{0}");
 
