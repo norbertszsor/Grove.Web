@@ -1,0 +1,10 @@
+a {
+    color: grey;
+}
+
+li .active {
+    text-decoration: underline;
+    font-weight: bold;
+    background-color: transparent !important;
+    color: rgb(0,100,0) !important;
+}

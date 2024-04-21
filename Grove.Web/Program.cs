@@ -33,6 +33,10 @@ builder.Services.AddCoreAdmin();
 
 #region app
 
+builder.Services.AddLocalization(options => 
+    options.ResourcesPath = "Resoruces"
+);
+
 var app = builder.Build();
 
 if (!app.Environment.IsDevelopment())
@@ -53,6 +57,16 @@ app.UseRouting();
 app.MapDefaultControllerRoute();
 
 app.UseAntiforgery();
+
+var supportedCultures = builder.Configuration.GetSection("Cultures")
+    .GetChildren().ToDictionary(x => x.Key, x => x.Value).Keys.ToArray();
+
+var localizationOptions = new RequestLocalizationOptions()
+    .SetDefaultCulture(supportedCultures[0])
+    .AddSupportedCultures(supportedCultures)
+    .AddSupportedUICultures(supportedCultures);
+
+app.UseRequestLocalization(localizationOptions);
 
 app.UseCoreAdminCustomTitle("Grove.Admin");
 

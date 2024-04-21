@@ -1,17 +1,19 @@
-﻿<div class="container-fluid fixed-top px-0">
-    <div class="container px-0">
-        <nav id="navbar-example" class="navbar navbar-dark bg-dark navbar-expand-xl">
+﻿@inject IStringLocalizer<NavMenu> Localizer;
+
+<div class="container-fluid fixed-top px-0">
+    <div class="container px-0" style="max-width: 85%;">
+        <nav id="navbar-example" class="navbar navbar-dark navbar-expand-xl itemHidden">
             <h1 class="text-primary display-5 ms-3 logo-font">Grove</h1>
             <button class="navbar-toggler py-2 px-3 me-3" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
                 <span class="fa fa-bars text-primary"></span>
             </button>
-            <div class="collapse navbar-collapse bg-dark" id="navbarCollapse">
+            <div class="collapse navbar-collapse" id="navbarCollapse">
                 <div class="navbar-nav ms-auto">
-                    <a href="#home" class="nav-item nav-link">Home</a>
-                    <a href="#about" class="nav-item nav-link">About us</a>
-                    <a href="#where" class="nav-item nav-link">Where we plant</a>
-                    <a href="#plant" class="nav-item nav-link">Plant a tree</a>
-                    <a href="#contact" class="nav-item nav-link">Contact</a>
+                    <a href="#home" class="nav-item nav-link">@Localizer["Home"]</a>
+                    <a href="#about" class="nav-item nav-link">@Localizer["About"]</a>
+                    <a href="#where" class="nav-item nav-link">@Localizer["Where we plant"]</a>
+                    <a href="#plant" class="nav-item nav-link">@Localizer["Plant a tree"]</a>
+                    <a href="#contact" class="nav-item nav-link">@Localizer["Contact"]</a>
                     <a href="#" class="nav-item nav-link pt-2 pb-0"><i class="fa badge fa-lg" style="color: black" value=0>&#xf07a;</i></a>
                 </div>
             </div>

@@ -1,0 +1,13 @@
+img {
+    opacity: 0.6;
+}
+
+.bg-img {
+    height: 600px;
+    background-image: url("img/trees-at-like.png");
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+    background-size: 100%;
+    background-color: transparent;
+    background-size: cover;
+}

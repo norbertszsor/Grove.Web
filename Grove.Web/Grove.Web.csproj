@@ -1,31 +1,32 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
-  <PropertyGroup>
-    <TargetFramework>net8.0</TargetFramework>
-    <Nullable>enable</Nullable>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <UserSecretsId>c7894a33-2427-4eb3-bd9f-7e157c37f732</UserSecretsId>
-    <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
-  </PropertyGroup>
+	<PropertyGroup>
+		<TargetFramework>net8.0</TargetFramework>
+		<Nullable>enable</Nullable>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<UserSecretsId>c7894a33-2427-4eb3-bd9f-7e157c37f732</UserSecretsId>
+		<DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+	</PropertyGroup>
 
-  <ItemGroup>
-    <Folder Include="Components\Pages\Shered\" />
-  </ItemGroup>
+	<ItemGroup>
+		<Folder Include="Components\Pages\Shered\" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <PackageReference Include="CoreAdmin" Version="3.0.0" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.4">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-    </PackageReference>
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="8.0.4" />
-    <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.19.6" />
-  </ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="CoreAdmin" Version="3.0.0" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.4">
+			<PrivateAssets>all</PrivateAssets>
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="8.0.4" />
+		<PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.19.6" />
+		<PackageReference Include="Microsoft.Extensions.Localization" Version="8.0.4" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\Grove.Handling\Grove.Handling.csproj" />
-    <ProjectReference Include="..\Grove.Infrastructure\Grove.Infrastructure.csproj" />
-    <ProjectReference Include="..\Grove.Logic\Grove.Logic.csproj" />
-  </ItemGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\Grove.Handling\Grove.Handling.csproj" />
+		<ProjectReference Include="..\Grove.Infrastructure\Grove.Infrastructure.csproj" />
+		<ProjectReference Include="..\Grove.Logic\Grove.Logic.csproj" />
+	</ItemGroup>
 
 </Project>
