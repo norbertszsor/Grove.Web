@@ -17,7 +17,14 @@ namespace Grove.Shared.Abstraction
         int? PageSize { get; }
     }
 
-    public interface ISearchQuery<out TResponse> : IPagedQuery<TResponse>
+    public interface ISortQuery<out TResponse> : IPagedQuery<TResponse>
+    {
+        string? Sort { get; }
+
+        string? Order { get; }
+    }
+
+    public interface ISearchQuery<out TResponse> : ISortQuery<TResponse>
     {
         string? Search { get; }
 

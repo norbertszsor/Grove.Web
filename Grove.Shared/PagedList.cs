@@ -24,7 +24,7 @@ namespace Grove.Shared
             PageSize = pageSize;
             TotalCount = count;
             TotalPages = (int)Math.Ceiling(count / (double)pageSize);
-            Items = items;
+            Items = items.ToList();
             HasPreviousPage = pageIndex > 1;
             HasNextPage = pageIndex < TotalPages;
         }

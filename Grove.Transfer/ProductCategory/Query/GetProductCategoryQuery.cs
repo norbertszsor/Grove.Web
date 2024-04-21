@@ -1,9 +1,9 @@
 ﻿using Grove.Shared.Abstraction;
-using Grove.Transfer.Product.Data;
+using Grove.Transfer.ProductCategory.Data;
 
 namespace Grove.Transfer.ProductCategory.Query
 {
-    public class GetProductQuery : IQuery<ProductDto>
+    public class GetProductCategoryQuery : IQuery<ProductCategoryDto>
     {
         public Guid Id { get; set; }
     }

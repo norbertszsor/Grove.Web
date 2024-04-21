@@ -17,7 +17,12 @@ namespace Grove.Handling.Abstraction
     {
     }
 
-    public interface ISearchQueryHandler<in TRequest, TResponse> : IPagedQueryHandler<TRequest, TResponse>
+    public interface ISortQueryHandler<in TRequest, TResponse> : IQueryHandler<TRequest, IPagedList<TResponse>>
+        where TRequest : ISortQuery<TResponse>
+    {
+    }
+
+    public interface ISearchQueryHandler<in TRequest, TResponse> : ISortQueryHandler<TRequest, TResponse>
         where TRequest : ISearchQuery<TResponse>
     {
     }

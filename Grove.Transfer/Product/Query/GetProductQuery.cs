@@ -5,5 +5,6 @@ namespace Grove.Transfer.Product.Query
 {
     public class GetProductQuery : IQuery<ProductDto>
     {
+        public Guid Id { get; set; }
     }
 }

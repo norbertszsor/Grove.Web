@@ -73,16 +73,20 @@ namespace Grove.Data
 
         private void OnChanges()
         {
-            var entities = ChangeTracker.Entries().Where(e => e.State is EntityState.Added or EntityState.Modified);
+            var entities = ChangeTracker.Entries()
+                .Where(e => e.State is EntityState.Added or EntityState.Modified);
 
             foreach (var entity in entities)
             {
-                if (entity.State is EntityState.Added)
+                switch (entity.State)
                 {
-                    entity.CurrentValues[nameof(Entity.CreatedAt)] = DateTime.Now;
+                    case EntityState.Added:
+                        entity.CurrentValues[nameof(Entity.CreatedAt)] = DateTime.Now;
+                        break;
+                    case EntityState.Modified:
+                        entity.CurrentValues[nameof(Entity.UpdatedAt)] = DateTime.Now;
+                        break;
                 }
-
-                entity.CurrentValues[nameof(Entity.UpdatedAt)] = DateTime.Now;
             }
         }
     }

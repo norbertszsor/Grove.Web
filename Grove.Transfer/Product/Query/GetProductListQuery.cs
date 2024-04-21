@@ -12,5 +12,9 @@ namespace Grove.Transfer.Product.Query
         public string? Search { get; set; }
 
         public string[]? Fields { get; set; }
+
+        public string? Sort { get; set; }
+
+        public string? Order { get; set; }
     }
 }

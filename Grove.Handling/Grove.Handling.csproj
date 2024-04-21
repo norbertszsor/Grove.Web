@@ -11,6 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Grove.Logic\Grove.Logic.csproj" />
     <ProjectReference Include="..\Grove.Shared\Grove.Shared.csproj" />
     <ProjectReference Include="..\Grove.Transfer\Grove.Transfer.csproj" />
   </ItemGroup>
