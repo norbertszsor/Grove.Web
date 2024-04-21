@@ -60,11 +60,6 @@ app.UseStatusCodePagesWithRedirects("/{0}");
 app.MapRazorComponents<App>()
     .AddInteractiveServerRenderMode();
 
-if (!app.Environment.IsDevelopment())
-{
-    app.Run("0.0.0.0:10000");
-}
-
 app.Run();
 
 #endregion
