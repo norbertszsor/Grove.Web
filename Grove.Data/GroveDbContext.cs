@@ -1,4 +1,5 @@
-﻿using Grove.Data.Models;
+﻿using Grove.Data.Abstraction;
+using Grove.Data.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace Grove.Data
@@ -14,6 +15,18 @@ namespace Grove.Data
         public required DbSet<ProductEm> Products { get; set; }
 
         public required DbSet<ProductCategoryEm> ProductCategories { get; set; }
+
+        public override int SaveChanges()
+        {
+            OnChanges();
+            return base.SaveChanges();
+        }
+
+        public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
+        {
+            OnChanges();
+            return base.SaveChangesAsync(cancellationToken);
+        }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -56,6 +69,21 @@ namespace Grove.Data
                     .HasForeignKey<CustomerEm>(e => e.BillingId)
                     .OnDelete(DeleteBehavior.Cascade);
             });
+        }
+
+        private void OnChanges()
+        {
+            var entities = ChangeTracker.Entries().Where(e => e.State is EntityState.Added or EntityState.Modified);
+
+            foreach (var entity in entities)
+            {
+                if (entity.State is EntityState.Added)
+                {
+                    entity.CurrentValues[nameof(Entity.CreatedAt)] = DateTime.Now;
+                }
+
+                entity.CurrentValues[nameof(Entity.UpdatedAt)] = DateTime.Now;
+            }
         }
     }
 }

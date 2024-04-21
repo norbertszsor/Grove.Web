@@ -11,5 +11,10 @@ namespace Grove.Data.Models
         public byte Type { get; set; }
 
         public virtual ICollection<ProductEm>? Products { get; set; }
+
+        public override string ToString()
+        {
+            return Name;
+        }
     }
 }

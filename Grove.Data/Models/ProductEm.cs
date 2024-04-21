@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using Grove.Data.Abstraction;
 
 namespace Grove.Data.Models
@@ -13,10 +14,15 @@ namespace Grove.Data.Models
 
         public decimal Price { get; set; }
 
+        [Display(AutoGenerateField = false)]
         public Guid CategoryId { get; set; }
 
         public byte Region { get; set; }
 
+        public byte[]? Image { get; set; }
+
+
+        [ForeignKey(nameof(CategoryId))]
         public virtual ProductCategoryEm? Category { get; set; }
 
         public virtual ICollection<BillingItemEm>? BillingItems { get; set; }
