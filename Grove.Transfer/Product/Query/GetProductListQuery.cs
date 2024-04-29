@@ -1,20 +1,9 @@
-﻿using Grove.Shared.Abstraction;
+﻿using Grove.Shared;
 using Grove.Transfer.Product.Data;
 
 namespace Grove.Transfer.Product.Query
 {
-    public class GetProductListQuery : ISearchQuery<ProductDto>
+    public class GetProductListQuery : SearchQuery<ProductDto>
     {
-        public int? PageIndex { get; set; }
-
-        public int? PageSize { get; set; }
-
-        public string? Search { get; set; }
-
-        public string[]? Fields { get; set; }
-
-        public string? Sort { get; set; }
-
-        public string? Order { get; set; }
     }
 }

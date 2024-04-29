@@ -1,21 +1,9 @@
-﻿using System.Linq.Expressions;
-using Grove.Data.Abstraction;
-using Grove.Data.Models;
+﻿using Grove.Data.Abstraction;
 
 namespace Grove.Infrastructure.Abstraction
 {
-    public interface IStorage
+    public interface IStorage : IReadOnlyStorage
     {
-        IQueryable<BillingEm> Billings { get; }
-
-        IQueryable<BillingItemEm> BillingItems { get; }
-
-        IQueryable<CustomerEm> Customers { get; }
-
-        IQueryable<ProductEm> Products { get; }
-
-        IQueryable<ProductCategoryEm> ProductCategories { get; }
-
         Task<Guid> InsertAsync<T>(T entity) where T : Entity;
 
         Task<T> InsertEntityAsync<T>(T entity) where T : Entity;

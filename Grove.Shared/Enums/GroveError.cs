@@ -8,6 +8,7 @@
         ProductCategoryNotUpdated,
         ProductNotCreated,
         ProductNotUpdated,
-        ProductNotFound
+        ProductNotFound,
+        RegionNotFound
     }
 }

@@ -14,17 +14,27 @@ namespace Grove.Data.Models
 
         public decimal Price { get; set; }
 
+        [MaxLength(1024)]
+        public int Stock { get; set; }
+
+        public bool IsAvailable { get; set; }
+
+        [Display(AutoGenerateField = false)]
+        public Guid? RegionId { get; set; }
+
         [Display(AutoGenerateField = false)]
         public Guid CategoryId { get; set; }
 
-        public byte Region { get; set; }
+        [Display(AutoGenerateField = false)]
+        public Guid? ImageId { get; set; }
 
-        public byte[]? Image { get; set; }
-
+        [ForeignKey(nameof(ImageId))]
+        public virtual BinaryFileEm? Image { get; set; }
 
         [ForeignKey(nameof(CategoryId))]
         public virtual ProductCategoryEm? Category { get; set; }
 
-        public virtual ICollection<BillingItemEm>? BillingItems { get; set; }
+        [ForeignKey(nameof(RegionId))]
+        public virtual ProductRegionEm? Region { get; set; }
     }
 }

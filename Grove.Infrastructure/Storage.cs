@@ -1,5 +1,4 @@
-﻿using System.Linq.Expressions;
-using Grove.Data;
+﻿using Grove.Data;
 using Grove.Data.Abstraction;
 using Grove.Data.Models;
 using Grove.Infrastructure.Abstraction;
@@ -17,6 +16,10 @@ namespace Grove.Infrastructure
         public IQueryable<ProductEm> Products => context.Products;
 
         public IQueryable<ProductCategoryEm> ProductCategories => context.ProductCategories;
+
+        public IQueryable<ProductRegionEm> Regions => context.Regions;
+
+        public IQueryable<BinaryFileEm> Files => context.Files;
 
         public async Task<Guid> InsertAsync<T>(T entity) where T : Entity
         {

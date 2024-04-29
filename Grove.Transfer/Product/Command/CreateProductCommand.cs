@@ -1,6 +1,5 @@
 ﻿using Grove.Shared.Abstraction;
 using System.ComponentModel.DataAnnotations;
-using Grove.Shared.Enums;
 using Grove.Transfer.Product.Data;
 
 namespace Grove.Transfer.Product.Command
@@ -21,6 +20,9 @@ namespace Grove.Transfer.Product.Command
         public Guid CategoryId { get; set; }
 
         [Required]
-        public Region Region { get; set; }
+        public Guid RegionId { get; set; }
+
+        [Required]
+        public byte[]? ImageData { get; set; }
     }
 }

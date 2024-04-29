@@ -25,7 +25,7 @@ namespace Grove.Handling.QueryHandlers
         public async Task<IPagedList<ProductCategoryDto>> Handle(GetProductCategoryListQuery request,
             CancellationToken cancellationToken)
         {
-            var products = storage.ProductCategories.ToPagedList(request);
+            var products = await storage.ProductCategories.ToPagedListAsync(request, cancellationToken);
 
             return products.Adapt<IPagedList<ProductCategoryDto>>();
         }

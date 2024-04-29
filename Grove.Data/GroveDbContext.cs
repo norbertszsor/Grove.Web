@@ -16,6 +16,10 @@ namespace Grove.Data
 
         public required DbSet<ProductCategoryEm> ProductCategories { get; set; }
 
+        public required DbSet<ProductRegionEm> Regions { get; set; }
+
+        public required DbSet<BinaryFileEm> Files { get; set; }
+
         public override int SaveChanges()
         {
             OnChanges();
@@ -40,17 +44,32 @@ namespace Grove.Data
 
             modelBuilder.Entity<BillingItemEm>(entity =>
             {
+                entity.HasOne(e => e.Billing)
+                    .WithMany(e => e.Items)
+                    .HasForeignKey(e => e.BillingId)
+                    .OnDelete(DeleteBehavior.Cascade);
+
                 entity.HasOne(e => e.Product)
-                    .WithMany(e => e.BillingItems)
+                    .WithMany()
                     .HasForeignKey(e => e.ProductId)
                     .OnDelete(DeleteBehavior.Cascade);
             });
 
             modelBuilder.Entity<ProductEm>(entity =>
             {
+                entity.HasOne(e => e.Image)
+                    .WithMany()
+                    .HasForeignKey(e => e.ImageId)
+                    .OnDelete(DeleteBehavior.SetNull);
+
                 entity.HasOne(e => e.Category)
                     .WithMany(e => e.Products)
                     .HasForeignKey(e => e.CategoryId)
+                    .OnDelete(DeleteBehavior.Cascade);
+
+                entity.HasOne(e => e.Region)
+                    .WithMany(e => e.Products)
+                    .HasForeignKey(e => e.RegionId)
                     .OnDelete(DeleteBehavior.Cascade);
             });
 
@@ -69,6 +88,21 @@ namespace Grove.Data
                     .HasForeignKey<CustomerEm>(e => e.BillingId)
                     .OnDelete(DeleteBehavior.Cascade);
             });
+
+            modelBuilder.Entity<ProductRegionEm>(entity =>
+            {
+                entity.HasMany(e => e.Products)
+                    .WithOne(e => e.Region)
+                    .HasForeignKey(e => e.RegionId)
+                    .OnDelete(DeleteBehavior.Cascade);
+
+                entity.HasOne(e => e.Image)
+                    .WithMany()
+                    .HasForeignKey(e => e.ImageId)
+                    .OnDelete(DeleteBehavior.SetNull);
+            });
+
+            modelBuilder.Entity<BinaryFileEm>(entity => { });
         }
 
         private void OnChanges()

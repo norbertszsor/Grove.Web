@@ -13,5 +13,9 @@ namespace Grove.Infrastructure.Abstraction
         IQueryable<ProductEm> Products { get; }
 
         IQueryable<ProductCategoryEm> ProductCategories { get; }
+
+        IQueryable<ProductRegionEm> Regions { get; }
+
+        IQueryable<BinaryFileEm> Files { get; }
     }
 }

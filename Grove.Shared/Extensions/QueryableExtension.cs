@@ -63,8 +63,6 @@ namespace Grove.Shared.Extensions
 
         public static IPagedList<T> ToPagedList<T, TResponse>(this IQueryable<T> query, IPagedQuery<TResponse> pagedQuery)
         {
-            var count = query.Count();
-
             var items = query.Paginate(pagedQuery.PageIndex ?? 1, pagedQuery.PageSize ?? 10);
 
             if (pagedQuery is ISortQuery<T> sortQuery)
@@ -77,7 +75,16 @@ namespace Grove.Shared.Extensions
                 items = items.Search(searchQuery);
             }
 
-            return new PagedList<T>(items.ToList(), count, pagedQuery.PageIndex ?? 1, pagedQuery.PageSize ?? 10);
+            var enumerableItems = items.Select(x => x);
+
+            return new PagedList<T>(enumerableItems, enumerableItems.Count(), pagedQuery.PageIndex ?? 1,
+                pagedQuery.PageSize ?? 10);
+        }
+
+        public static async Task<IPagedList<T>> ToPagedListAsync<T, TResponse>(this IQueryable<T> query,
+            IPagedQuery<TResponse> pagedQuery, CancellationToken cancellationToken)
+        {
+            return await Task.Run(() => query.ToPagedList(pagedQuery), cancellationToken);
         }
     }
 }
