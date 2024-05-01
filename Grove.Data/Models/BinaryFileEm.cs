@@ -13,5 +13,10 @@ namespace Grove.Data.Models
         public byte Type { get; set; }
 
         public required byte[] Data { get; set; }
+
+        public override string ToString()
+        {
+            return Name;
+        }
     }
 }

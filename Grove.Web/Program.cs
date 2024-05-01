@@ -1,4 +1,6 @@
+using DotNetEd.CoreAdmin;
 using Grove.Data;
+using Grove.Data.Models;
 using Grove.Handling;
 using Grove.Infrastructure;
 using Grove.Logic;
@@ -26,7 +28,15 @@ builder.Services.AddDbContext<GroveDbContext>(options =>
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
 
-builder.Services.AddCoreAdmin();
+builder.Services.AddCoreAdmin(new CoreAdminOptions()
+{
+    IgnoreEntityTypes =
+    [
+        typeof(BillingEm),
+        typeof(BillingItemEm),
+        typeof(CustomerEm)
+    ]
+});
 
 #endregion
 
