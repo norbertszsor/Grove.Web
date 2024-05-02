@@ -1,0 +1,62 @@
+﻿@page "/corelogin"
+
+@rendermode InteractiveServer
+
+@using Grove.Logic.Abstraction
+@using Grove.Transfer.User.Command
+@using Grove.Transfer.User.Data
+@using MediatR
+
+@inject NavigationManager _navigationManager
+@inject IUserService _userService
+@inject IMediator _mediator
+
+<PageTitle>Login</PageTitle>
+
+<div class="container mt-4">
+
+    <h3>Login</h3>
+
+    <EditForm FormName="Login" Model="user" OnValidSubmit="HandleLogin">
+        <DataAnnotationsValidator />
+        <div class="mb-3">
+            <label for="name">Name</label>
+            <InputText id="name" @bind-Value="user.Name" class="form-control" />
+            <ValidationMessage For="@(() => user.Name)" />
+        </div>
+        <div class="mb-3">
+            <label for="password">Password</label>
+            <InputText id="password" @bind-Value="user.Password" class="form-control" type="password" />
+            <ValidationMessage For="@(() => user.Password)" />
+        </div>
+        <button type="submit" class="btn btn-primary">Login</button>
+    </EditForm>
+
+    <div class="text-danger">
+        <span>@errorMessage</span>
+    </div>
+
+</div>
+
+@code {
+    private UserLoginDto user = new UserLoginDto();
+
+    private string errorMessage = string.Empty;
+
+    private async Task HandleLogin()
+    {
+        var result = await _mediator.Send(new LoginUserCommand { Name = user.Name, Password = user.Password });
+        if (result)
+        {
+            errorMessage = string.Empty;
+
+            // await LocalStorage.SetItemAsync("authToken", result.Data);
+            _navigationManager.NavigateTo("/coreadmin");
+        }
+        else
+        {
+            errorMessage = "Invalid Name or Password!";
+        }
+    }
+
+}

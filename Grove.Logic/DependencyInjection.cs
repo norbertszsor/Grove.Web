@@ -11,6 +11,7 @@ namespace Grove.Logic
         {
             services.AddScoped<IProductService, ProductService>();
             services.AddScoped<IProductCategoryService, ProductCategoryService>();
+            services.AddSingleton<IUserService, UserService>();
 
             services.AddMapster();
 

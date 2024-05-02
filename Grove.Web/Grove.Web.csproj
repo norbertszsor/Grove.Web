@@ -9,10 +9,6 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<Folder Include="Components\Pages\Shered\" />
-	</ItemGroup>
-
-	<ItemGroup>
 		<PackageReference Include="CoreAdmin" Version="3.0.0" />
 		<PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.4">
 			<PrivateAssets>all</PrivateAssets>

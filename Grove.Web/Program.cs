@@ -82,6 +82,8 @@ app.UseCoreAdminCustomTitle("Grove.Admin");
 
 app.UseStatusCodePagesWithRedirects("/{0}");
 
+app.UseCoreAdminCustomAuth(CustomAuthExtension.customAuthFunctiion);
+
 app.MapRazorComponents<App>()
     .AddInteractiveServerRenderMode();
 
