@@ -3,18 +3,23 @@ using System.Security.Claims;
 using System.Text;
 using Grove.Data.Models;
 using Grove.Logic.Abstraction;
-using Microsoft.Extensions.Options;
+using Grove.Shared.Enums;
+using Grove.Shared.Extensions;
+using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 
 namespace Grove.Logic.Providers
 {
-    public class TokenProvider(IOptions<TokenOptions> options) : ITokenProvider
+    public class TokenProvider(IConfiguration configuration) : ITokenProvider
     {
         public string GenerateToken(UserEm user)
         {
             var tokenHandler = new JwtSecurityTokenHandler();
 
-            var key = Encoding.ASCII.GetBytes(options.Value.SecretKey);
+            var tokenOptions = configuration.GetSection(nameof(TokenOptions)).Get<TokenOptions>() ??
+                               throw GroveError.MissingSecretKey.Throw();
+            
+            var key = Encoding.ASCII.GetBytes(tokenOptions.SecretKey);
 
             var tokenDescriptor = new SecurityTokenDescriptor
             {

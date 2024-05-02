@@ -16,5 +16,6 @@
         UserNotCreated,
         UserNotUpdated,
         AuthFailed,
+        MissingSecretKey
     }
 }
