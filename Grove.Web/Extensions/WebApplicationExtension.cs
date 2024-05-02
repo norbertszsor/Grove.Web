@@ -1,5 +1,6 @@
 ﻿using Grove.Data;
 using Grove.Data.Models;
+using Grove.Logic.Helpers;
 using Microsoft.EntityFrameworkCore;
 
 namespace Grove.Web.Extensions
@@ -32,7 +33,12 @@ namespace Grove.Web.Extensions
                 return app;
             } 
 
-            dbContext.Users.Add(root);
+            dbContext.Users.Add(new UserEm()
+            {
+                Email = root.Email,
+                UserType = root.UserType,
+                Password = CryptHelper.HashString(root.Password)
+            });
 
             dbContext.SaveChanges();
 
