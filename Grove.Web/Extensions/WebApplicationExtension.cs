@@ -1,4 +1,5 @@
 ﻿using Grove.Data;
+using Grove.Data.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace Grove.Web.Extensions
@@ -12,6 +13,28 @@ namespace Grove.Web.Extensions
             var dbContext = scope.ServiceProvider.GetRequiredService<GroveDbContext>();
 
             dbContext.Database.Migrate();
+
+            return app;
+        }
+
+        public static WebApplication ApplySeed(this WebApplication app)
+        {
+            using var scope = app.Services.CreateScope();
+
+            var dbContext = scope.ServiceProvider.GetRequiredService<GroveDbContext>();
+
+            var root = scope.ServiceProvider.GetRequiredService<IConfiguration>()
+                .GetSection("RootUser")
+                .Get<UserEm>();
+
+            if (dbContext.Users.Any() || root == null)
+            {
+                return app;
+            } 
+
+            dbContext.Users.Add(root);
+
+            dbContext.SaveChanges();
 
             return app;
         }

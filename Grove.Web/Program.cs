@@ -77,6 +77,8 @@ if (!app.Environment.IsDevelopment())
 
 app.ApplyMigrations();
 
+app.ApplySeed();
+
 app.UseHttpsRedirection();
 
 app.UseStaticFiles();
