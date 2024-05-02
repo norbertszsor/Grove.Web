@@ -1,18 +1,17 @@
-﻿@*
-@page "/corelogin"
+﻿@page "/corelogin"
 @using Grove.Transfer.Auth.Data
 @using Grove.Transfer.Auth.Command
 @using MediatR
 
 @rendermode InteractiveServer
 
-@    using Grove.Logic.Abstraction
-@    using Grove.Transfer.User.Command
-@    using Grove.Transfer.User.Data
-@    using MediatR
+@using Grove.Logic.Abstraction
+@using Grove.Transfer.Auth.Command
+@using Grove.Transfer.Auth.Data
+@using MediatR
 
 @inject NavigationManager _navigationManager
-@inject IUserService _userService
+@inject IAuthService _userService
 @inject IMediator _mediator
 
 <PageTitle>Login</PageTitle>
@@ -43,25 +42,30 @@
 </div>
 
 @code {
-    private AuthDto user = new AuthDto();
+    private LoginDto user = new LoginDto();
 
     private string errorMessage = string.Empty;
 
     private async Task HandleLogin()
     {
-        var result = await _mediator.Send(new AuthCommand { Email = user.Email, Password = user.Password });
-        if (result)
+        try
         {
+            var result = await _mediator.Send(new AuthCommand { Email = user.Email, Password = user.Password });
             errorMessage = string.Empty;
 
             // await LocalStorage.SetItemAsync("authToken", result.Data);
             _navigationManager.NavigateTo("/coreadmin");
         }
-        else
+        catch (Exception)
         {
             errorMessage = "Invalid Email or Password!";
         }
     }
 
+    public class LoginDto
+    {
+        public string Email { get; set; }
+        public string Password { get; set; }
+    }
 }
-*@
+

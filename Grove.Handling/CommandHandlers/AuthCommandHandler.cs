@@ -5,11 +5,11 @@ using Grove.Transfer.Auth.Data;
 
 namespace Grove.Handling.CommandHandlers
 {
-    public class AuthCommandHandler(IAuthService userService) : ICommandHandler<AuthCommand, AuthDto>
+    public class AuthCommandHandler(IAuthService authService) : ICommandHandler<AuthCommand, AuthDto>
     {
         public async Task<AuthDto> Handle(AuthCommand request, CancellationToken cancellationToken)
         {
-            return await userService.AuthenticateAsync(request);
+            return await authService.AuthenticateAsync(request);
         }
     }
 }
