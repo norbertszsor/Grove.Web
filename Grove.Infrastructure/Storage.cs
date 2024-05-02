@@ -21,6 +21,8 @@ namespace Grove.Infrastructure
 
         public IQueryable<BinaryFileEm> Files => context.Files;
 
+        public IQueryable<UserEm> Users => context.Users;
+
         public async Task<Guid> InsertAsync<T>(T entity) where T : Entity
         {
             await context.AddAsync(entity);

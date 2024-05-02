@@ -8,6 +8,6 @@ namespace Grove.Data.Models
 
         public required string Password { get; set; }
 
-        public required byte Type { get; set; }
+        public required byte UserType { get; set; }
     }
 }

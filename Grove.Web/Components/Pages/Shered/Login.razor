@@ -21,7 +21,7 @@
 
     <h3>Login</h3>
 
-    <EditForm FormName="Login" Model="user" OnValidSubmit="HandleLogin">
+    <EditForm FormEmail="Login" Model="user" OnValidSubmit="HandleLogin">
         <DataAnnotationsValidator />
         <div class="mb-3">
             <label for="name">Email</label>
@@ -49,7 +49,7 @@
 
     private async Task HandleLogin()
     {
-        var result = await _mediator.Send(new AuthCommand { Name = user.Email, Password = user.Password });
+        var result = await _mediator.Send(new AuthCommand { Email = user.Email, Password = user.Password });
         if (result)
         {
             errorMessage = string.Empty;

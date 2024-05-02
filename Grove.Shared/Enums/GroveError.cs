@@ -9,6 +9,12 @@
         ProductNotCreated,
         ProductNotUpdated,
         ProductNotFound,
-        RegionNotFound
+        RegionNotFound,
+        RegionNotCreated,
+        RegionNotUpdated,
+        UserNotFound,
+        UserNotCreated,
+        UserNotUpdated,
+        AuthFailed,
     }
 }

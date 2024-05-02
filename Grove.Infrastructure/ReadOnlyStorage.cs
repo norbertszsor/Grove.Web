@@ -20,5 +20,7 @@ namespace Grove.Infrastructure
         public IQueryable<ProductRegionEm> Regions => context.Regions.AsNoTracking();
 
         public IQueryable<BinaryFileEm> Files => context.Files.AsNoTracking();
+
+        public IQueryable<UserEm> Users => context.Users.AsNoTracking();
     }
 }

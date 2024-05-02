@@ -1,3 +1,4 @@
+using System.Text;
 using DotNetEd.CoreAdmin;
 using Grove.Data;
 using Grove.Data.Models;
@@ -6,7 +7,9 @@ using Grove.Infrastructure;
 using Grove.Logic;
 using Grove.Web.Components;
 using Grove.Web.Extensions;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 
 #region builder
 
@@ -25,6 +28,21 @@ builder.Services.AddLogic();
 builder.Services.AddDbContext<GroveDbContext>(options =>
     options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection")));
 
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+    .AddJwtBearer(options =>
+    {
+        options.RequireHttpsMetadata = false;
+        options.SaveToken = true;
+        options.TokenValidationParameters = new TokenValidationParameters
+        {
+            ValidateIssuerSigningKey = true,
+            IssuerSigningKey =
+                new SymmetricSecurityKey(Encoding.ASCII.GetBytes(builder.Configuration["TokenOptions:SecretKey"]!)),
+            ValidateIssuer = false,
+            ValidateAudience = false
+        };
+    });
+
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
 
@@ -34,7 +52,8 @@ builder.Services.AddCoreAdmin(new CoreAdminOptions()
     [
         typeof(BillingEm),
         typeof(BillingItemEm),
-        typeof(CustomerEm)
+        typeof(CustomerEm),
+        typeof(UserEm)
     ]
 });
 
@@ -77,6 +96,10 @@ var localizationOptions = new RequestLocalizationOptions()
     .AddSupportedUICultures(supportedCultures);
 
 app.UseRequestLocalization(localizationOptions);
+
+app.UseAuthentication();
+
+app.UseAuthorization();
 
 app.UseCoreAdminCustomTitle("Grove.Admin");
 

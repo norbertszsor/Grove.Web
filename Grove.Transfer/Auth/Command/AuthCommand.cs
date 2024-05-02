@@ -8,7 +8,7 @@ namespace Grove.Transfer.Auth.Command
     {
         [Required]
         [MaxLength(20)]
-        public required string Name { get; set; }
+        public required string Email { get; set; }
 
         [Required]
         [MaxLength(20)]

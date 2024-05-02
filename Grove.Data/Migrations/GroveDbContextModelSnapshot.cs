@@ -295,11 +295,11 @@ namespace Grove.Data.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<byte>("Type")
-                        .HasColumnType("INTEGER");
-
                     b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("TEXT");
+
+                    b.Property<byte>("UserType")
+                        .HasColumnType("INTEGER");
 
                     b.HasKey("Id");
 
