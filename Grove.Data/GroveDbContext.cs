@@ -20,6 +20,8 @@ namespace Grove.Data
 
         public required DbSet<BinaryFileEm> Files { get; set; }
 
+        public required DbSet<UserEm> Users { get; set; }
+
         public override int SaveChanges()
         {
             OnChanges();
@@ -103,6 +105,8 @@ namespace Grove.Data
             });
 
             modelBuilder.Entity<BinaryFileEm>(entity => { });
+
+            modelBuilder.Entity<UserEm>(entity => { });
         }
 
         private void OnChanges()

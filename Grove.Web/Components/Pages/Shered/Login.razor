@@ -1,11 +1,15 @@
-﻿@page "/corelogin"
+﻿@*
+@page "/corelogin"
+@using Grove.Transfer.Auth.Data
+@using Grove.Transfer.Auth.Command
+@using MediatR
 
 @rendermode InteractiveServer
 
-@using Grove.Logic.Abstraction
-@using Grove.Transfer.User.Command
-@using Grove.Transfer.User.Data
-@using MediatR
+@    using Grove.Logic.Abstraction
+@    using Grove.Transfer.User.Command
+@    using Grove.Transfer.User.Data
+@    using MediatR
 
 @inject NavigationManager _navigationManager
 @inject IUserService _userService
@@ -20,9 +24,9 @@
     <EditForm FormName="Login" Model="user" OnValidSubmit="HandleLogin">
         <DataAnnotationsValidator />
         <div class="mb-3">
-            <label for="name">Name</label>
-            <InputText id="name" @bind-Value="user.Name" class="form-control" />
-            <ValidationMessage For="@(() => user.Name)" />
+            <label for="name">Email</label>
+            <InputText id="name" @bind-Value="user.Email" class="form-control" />
+            <ValidationMessage For="@(() => user.Email)" />
         </div>
         <div class="mb-3">
             <label for="password">Password</label>
@@ -39,13 +43,13 @@
 </div>
 
 @code {
-    private UserLoginDto user = new UserLoginDto();
+    private AuthDto user = new AuthDto();
 
     private string errorMessage = string.Empty;
 
     private async Task HandleLogin()
     {
-        var result = await _mediator.Send(new LoginUserCommand { Name = user.Name, Password = user.Password });
+        var result = await _mediator.Send(new AuthCommand { Name = user.Email, Password = user.Password });
         if (result)
         {
             errorMessage = string.Empty;
@@ -55,8 +59,9 @@
         }
         else
         {
-            errorMessage = "Invalid Name or Password!";
+            errorMessage = "Invalid Email or Password!";
         }
     }
 
 }
+*@

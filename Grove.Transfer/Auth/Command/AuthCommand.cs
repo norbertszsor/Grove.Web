@@ -1,19 +1,15 @@
 ﻿using Grove.Shared.Abstraction;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Input;
+using Grove.Transfer.Auth.Data;
 
-namespace Grove.Transfer.User.Command
+namespace Grove.Transfer.Auth.Command
 {
-    public class LoginUserCommand : ICommand<bool>
+    public class AuthCommand : ICommand<AuthDto>
     {
         [Required]
         [MaxLength(20)]
         public required string Name { get; set; }
+
         [Required]
         [MaxLength(20)]
         public required string Password { get; set; }
