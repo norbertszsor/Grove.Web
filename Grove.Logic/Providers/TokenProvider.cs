@@ -34,16 +34,6 @@ namespace Grove.Logic.Providers
                     SecurityAlgorithms.HmacSha256Signature)
             };
 
-            try
-            {
-                tokenHandler.CreateToken(tokenDescriptor);
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-                throw;
-            }
-
             var token = tokenHandler.CreateToken(tokenDescriptor);
 
             return tokenHandler.WriteToken(token);
