@@ -5,6 +5,7 @@ using Grove.Data.Models;
 using Grove.Handling;
 using Grove.Infrastructure;
 using Grove.Logic;
+using Grove.Logic.Abstraction;
 using Grove.Web.Components;
 using Grove.Web.Extensions;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -43,6 +44,15 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
         };
     });
 
+builder.Services.AddDistributedMemoryCache();
+
+builder.Services.AddSession(options =>
+{
+    options.IdleTimeout = TimeSpan.FromMinutes(30);
+    options.Cookie.HttpOnly = true;
+    options.Cookie.IsEssential = true;
+});
+
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
 
@@ -58,7 +68,6 @@ builder.Services.AddCoreAdmin(new CoreAdminOptions()
 });
 
 #endregion
-
 
 #region app
 
@@ -102,6 +111,10 @@ app.UseRequestLocalization(localizationOptions);
 app.UseAuthentication();
 
 app.UseAuthorization();
+
+app.UseSession();
+
+app.UseCoreAdminCustomAuth(x => x.GetService<IAuthService>()!.IsAuthenticatedAdminAsync());
 
 app.UseCoreAdminCustomTitle("Grove.Admin");
 

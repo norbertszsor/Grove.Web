@@ -1,0 +1,77 @@
+﻿@page "/admin"
+@using Grove.Transfer.Auth.Command
+@using MediatR
+@using System.Text.Json
+
+@rendermode InteractiveServer
+
+@inject NavigationManager NavigationManager
+@inject IMediator Mediator
+@inject IHttpContextAccessor HttpContextAccessor
+
+<PageTitle>Login</PageTitle>
+
+<div class="container mt-4">
+
+    <h3>Login</h3>
+
+    <EditForm FormEmail="Login" Model="_user" OnValidSubmit="HandleAuth">
+        <DataAnnotationsValidator />
+        <div class="mb-3">
+            <label for="name">Email</label>
+            <InputText id="name" @bind-Value="_user.Email" class="form-control" />
+            <ValidationMessage For="@(() => _user.Email)" />
+        </div>
+        <div class="mb-3">
+            <label for="password">Password</label>
+            <InputText id="password" @bind-Value="_user.Password" class="form-control" type="password" />
+            <ValidationMessage For="@(() => _user.Password)" />
+        </div>
+        <button type="submit" class="btn btn-primary">Login</button>
+    </EditForm>
+
+    <div class="text-danger">
+        <span>@_errorMessage</span>
+    </div>
+
+</div>
+
+@code {
+    private readonly AuthModel _user = new();
+
+    private string _errorMessage = string.Empty;
+
+    private const string CredentialsErrorMessage = "Invalid Email or Password!";
+
+    private const string AdminDashboardPath = "/coreadmin";
+
+    private async Task HandleAuth()
+    {
+        try
+        {
+            var result = await Mediator.Send(new AuthCommand
+            {
+                Email = _user.Email!,
+                Password = _user.Password!
+            });
+            
+            _errorMessage = string.Empty;
+
+            HttpContextAccessor.HttpContext?.Session.SetString("AuthModel",
+                JsonSerializer.Serialize(result));
+
+            NavigationManager.NavigateTo(AdminDashboardPath);
+        }
+        catch (Exception)
+        {
+            _errorMessage = CredentialsErrorMessage;
+        }
+    }
+
+    private class AuthModel
+    {
+        public string? Email { get; set; }
+        public string? Password { get; set; }
+    }
+}
+
