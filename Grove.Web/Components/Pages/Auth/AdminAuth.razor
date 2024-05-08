@@ -1,40 +1,45 @@
 ﻿@page "/admin"
 @using Grove.Transfer.Auth.Command
+@using Grove.Transfer.Auth.Data
 @using MediatR
-@using System.Text.Json
+@using Microsoft.AspNetCore.Components.Server.ProtectedBrowserStorage
 
 @rendermode InteractiveServer
 
 @inject NavigationManager NavigationManager
 @inject IMediator Mediator
-@inject IHttpContextAccessor HttpContextAccessor
+@inject ProtectedSessionStorage ProtectedSessionStorage
 
-<PageTitle>Login</PageTitle>
+<PageTitle>Grove.Auth</PageTitle>
 
-<div class="container mt-4">
+<body style="background-color: #343a40;">
+<div class="container mt-4 d-flex flex-column justify-content-center align-items-center" style="height: 100vh;">
+    <div class="login-form" style="width: 30%; background-color: #c3e6cb; padding: 20px; border-radius: 5px;">
+        <h3 class="text-center">Login</h3>
 
-    <h3>Login</h3>
-
-    <EditForm FormEmail="Login" Model="_user" OnValidSubmit="HandleAuth">
-        <DataAnnotationsValidator />
-        <div class="mb-3">
-            <label for="name">Email</label>
-            <InputText id="name" @bind-Value="_user.Email" class="form-control" />
-            <ValidationMessage For="@(() => _user.Email)" />
-        </div>
-        <div class="mb-3">
-            <label for="password">Password</label>
-            <InputText id="password" @bind-Value="_user.Password" class="form-control" type="password" />
-            <ValidationMessage For="@(() => _user.Password)" />
-        </div>
-        <button type="submit" class="btn btn-primary">Login</button>
-    </EditForm>
-
-    <div class="text-danger">
+        <EditForm FormEmail="Login" Model="_user" OnValidSubmit="HandleAuth">
+            <DataAnnotationsValidator />
+            <div class="mb-3">
+                <label for="name">Email</label>
+                <InputText id="name" @bind-Value="_user.Email" class="form-control" />
+                <ValidationMessage For="@(() => _user.Email)" />
+            </div>
+            <div class="mb-3">
+                <label for="password">Password</label>
+                <InputText id="password" @bind-Value="_user.Password" class="form-control" type="password" />
+                <ValidationMessage For="@(() => _user.Password)" />
+            </div>
+            <button type="submit" class="btn btn-primary" style="width: 100%;">Login</button>
+        </EditForm>
+    </div>
+    <div class="text-danger text-center">
         <span>@_errorMessage</span>
     </div>
-
 </div>
+</body>
+
+
+
 
 @code {
     private readonly AuthModel _user = new();
@@ -45,26 +50,37 @@
 
     private const string AdminDashboardPath = "/coreadmin";
 
+    private const string AuthDtoKey = nameof(AuthDto);
+
     private async Task HandleAuth()
     {
         try
         {
-            var result = await Mediator.Send(new AuthCommand
-            {
-                Email = _user.Email!,
-                Password = _user.Password!
-            });
-            
             _errorMessage = string.Empty;
 
-            HttpContextAccessor.HttpContext?.Session.SetString("AuthModel",
-                JsonSerializer.Serialize(result));
+            await GetOrCrateTokenAsync();
 
             NavigationManager.NavigateTo(AdminDashboardPath);
         }
         catch (Exception)
         {
             _errorMessage = CredentialsErrorMessage;
+        }
+    }
+
+    private async Task GetOrCrateTokenAsync()
+    {
+        var authDto = await ProtectedSessionStorage.GetAsync<AuthDto>(AuthDtoKey);
+
+        if (authDto.Value is null)
+        {
+            var result = await Mediator.Send(new AuthCommand
+            {
+                Email = _user.Email!,
+                Password = _user.Password!
+            });
+
+            await ProtectedSessionStorage.SetAsync(AuthDtoKey, result);
         }
     }
 
