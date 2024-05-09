@@ -12,37 +12,32 @@
 
 <PageTitle>Grove.Auth</PageTitle>
 
-<body style="background-color: #343a40;">
-<div class="container mt-4 d-flex flex-column justify-content-center align-items-center" style="height: 100vh;">
-    <div class="login-form" style="width: 30%; background-color: #c3e6cb; padding: 20px; border-radius: 5px;">
+<div class="container mt-4 d-flex flex-column justify-top-center align-items-center" style="height: 100vh;">
+        <div class="login-form" style="width: 30%; background-color: #343a40; padding: 20px; border-radius: 5px;">
         <h3 class="text-center">Login</h3>
 
-        <EditForm FormEmail="Login" Model="_user" OnValidSubmit="HandleAuth">
+        <EditForm FormEmail="Login" Model="_authModel" OnValidSubmit="HandleAuth">
             <DataAnnotationsValidator />
             <div class="mb-3">
-                <label for="name">Email</label>
-                <InputText id="name" @bind-Value="_user.Email" class="form-control" />
-                <ValidationMessage For="@(() => _user.Email)" />
+                <label for="name" style="margin-bottom:2px">Email</label>
+                <InputText id="name" @bind-Value="_authModel.Email" class="form-control" />
+                <ValidationMessage For="@(() => _authModel.Email)" />
             </div>
             <div class="mb-3">
-                <label for="password">Password</label>
-                <InputText id="password" @bind-Value="_user.Password" class="form-control" type="password" />
-                <ValidationMessage For="@(() => _user.Password)" />
+                <label for="password" style="margin-bottom:2px">Password</label>
+                <InputText id="password" @bind-Value="_authModel.Password" class="form-control" type="password" />
+                <ValidationMessage For="@(() => _authModel.Password)" />
             </div>
-            <button type="submit" class="btn btn-primary" style="width: 100%;">Login</button>
+            <button type="submit" class="btn btn-danger" style="width: 100%;">Login</button>
         </EditForm>
     </div>
     <div class="text-danger text-center">
         <span>@_errorMessage</span>
     </div>
 </div>
-</body>
-
-
-
 
 @code {
-    private readonly AuthModel _user = new();
+    private readonly AuthModel _authModel = new();
 
     private string _errorMessage = string.Empty;
 
@@ -76,8 +71,8 @@
         {
             var result = await Mediator.Send(new AuthCommand
             {
-                Email = _user.Email!,
-                Password = _user.Password!
+                Email = _authModel.Email!,
+                Password = _authModel.Password!
             });
 
             await ProtectedSessionStorage.SetAsync(AuthDtoKey, result);
